@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+    <title>HRMS</title>
+</head>
+<body>
+    <h1> Human Resource Management </h1>
+    <hr>
+    {% if result %}
+        <dialog open>Attrition Status: {{result}}</dialog>
+    {% endif %}
+    <form action="", method="POST">
+        {% csrf_token %}
+            1) Daily Rate: <input type = "number", name = "DailyRate"><br>
+            2) Department: <select name="Department" id="Department">
+              <option value=0>Human Resource</option>
+              <option value=1>Research and Development</option>
+              <option value=2>Sales</option>
+            </select><br>
+            3) Distance from home: <input type = "number", name="DistanceFromHome"><br>
+            4) Eductation: 1<input type="range" min=1 max=5 value=3 name="Education">5<br>
+            5) Eductation Field: <select name="EducationField" id="EducationField">
+                <option value=0>Human Resource</option>
+                <option value=1>Life Sciences</option>
+                <option value=2>Marketing</option>
+                <option value=3>Medical</option>
+                <option value=5>Techincal</option>
+                <option value=4>Other</option>
+            </select><br>
+            6) Employee Number: <input type="number", name="EmployeeNumber"><br>
+            7) Environment Satisfaction: 1<input type="range" min=1 max=4 value=2 name="EnvironmentSatisfaction">4<br>
+            8) Gender: <select name="Gender", id="Gender">
+                <option value = 0>Female</option>
+                <option value = 1>Male</option>
+            </select><br>
+            9) Job Role: <select name="JobRole", id="JobRole">
+                <option value=0>Healthcare Representative</option>
+                <option value=1>Human Resources</option>
+                <option value=2>Laboratory Technician</option>
+                <option value=3>Manager</option>
+                <option value=4>Manufacturing Director</option>
+                <option value=5>Research Director</option>
+                <option value=6>Research Scientist</option>
+                <option value=7>Sales Executive</option>
+                <option value=8>Sales Representative</option>
+            </select><br>
+            10) Job Satisfaction: 1<input type="range" min=1 max=4 value=2 name="JobSatisfaction">4<br> 
+            11) Number of Companies Worked: <input type="number" name="NumCompaniesWorked"><br>
+            12) Percent Salary Hike: <input type="number", name="PercentSalaryHike"><br>
+            13) Performance Rating: 1<input type="range" min=1 max=4 value=2 name="PerformanceRating">4<br>  
+            14) Relationship Satisfaction: 1<input type="range" min=1 max=4 value=2 name="RelationshipSatisfaction">4<br>  
+            15) Training Times Last Year: <input type="number", name="TrainingTimesLastYear"><br>
+            16) Work Life Balance: 1<input type="range" min=1 max=4 value=2 name="WorkLifeBalance">4<br>
+            17) Years Since Last Promotion: <input type="number", name="YearsSinceLastPromotion"><br>
+            </select>
+            
+            <button type="submit">Submit</button>
+
+    </form>
+</body>
+</html>

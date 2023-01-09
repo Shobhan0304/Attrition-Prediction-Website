@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HRMS with DB</title>
+    </head>
+    <body>
+        <style>
+            table {border-collapse: collapse;}
+
+            th, td{
+                border: 1px solid black;
+                padding: 15px 15px;
+            }
+
+            .table-wrap{
+                height: 1000px;
+                overflow-y: scroll;
+                display: iniline-block;
+            }
+        </style>
+        <h1> Human Resource Management </h1>
+        <hr>
+        {% if result %}
+            <dialog open>Attrition status: {{result}}</dialog>
+        {% endif %}
+        <form action="", method="POST">
+            {% csrf_token %}
+
+            Employee Number: <input type="number", name="EmployeeNumber"><br>
+
+            <button type="submit">Submit</button>
+
+        </form>
+        <br><br><hr><br>
+        <h2><center>Employee Details:</center></h2>
+        <br><br>
+        <div class="table-wrap">
+        <table>
+            <tr>
+                <th>S.No.</th>
+                <th>Daily Rate</th>
+                <th>Department</th>
+                <th>Distance From Home</th>
+                <th>Education</th>
+                <th>Education Field</th>
+                <th>Employee Number</th>
+                <th>Environment Satisfaction</th>
+                <th>Gender</th>
+                <th>Job Role</th>
+                <th>Job Satisfaction</th>
+                <th>No. of Companies Worked</th>
+                <th>Percent Salary Hike</th>
+                <th>Performance Rating</th>
+                <th>Relationship Satisfaction</th>
+                <th>Training times</th>
+                <th>Work Life Balance</th>
+                <th>Years since last promo</th>
+            </tr>
+            {% for item in qres %}
+            <tr>
+                <td>{{item.id}}</td>
+                <td>{{item.DailyRate}}</td>
+                <td>{{item.Department}}</td>
+                <td>{{item.DistanceFromHome}}</td>
+                <td>{{item.Education}}</td>
+                <td>{{item.EducationField}}</td>
+                <td>{{item.EmployeeNumber}}</td>
+                <td>{{item.EnvironmentSatisfaction}}</td>
+                <td>{{item.Gender}}</td>
+                <td>{{item.JobRole}}</td>
+                <td>{{item.JobSatisfaction}}</td>
+                <td>{{item.NumCompaniesWorked}}</td>
+                <td>{{item.PercentSalaryHike}}</td>
+                <td>{{item.PerformanceRating}}</td>
+                <td>{{item.RelationshipSatisfaction}}</td>
+                <td>{{item.TrainingTimesLastYear}}</td>
+                <td>{{item.WorkLifeBalance}}</td>
+                <td>{{item.YearsSinceLastPromotion}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        </div>
+    </body>
+</html>
