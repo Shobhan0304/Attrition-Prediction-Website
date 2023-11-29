@@ -2,8 +2,7 @@
 <html>
     <head>
         <title>HRMS with DB</title>
-    </head>
-    <body>
+    
         <style>
             table {border-collapse: collapse;}
 
@@ -13,17 +12,43 @@
             }
 
             .table-wrap{
-                height: 1000px;
+                height: 500px;
                 overflow-y: scroll;
-                display: iniline-block;
+                display: inline-block;
             }
+
+            .pagination {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .pagination a {
+            display: inline-block;
+            padding: 8px 16px;
+            text-decoration: none;
+            color: black;
+            background-color: #f2f2f2;
+            border: 1px solid #ddd;
+        }
+
+        .pagination a:hover {
+            background-color: #ddd;
+        }
+
+        .pagination .current {
+            background-color: #4CAF50;
+            color: white;
+            border: 1px solid #4CAF50;
+        }
         </style>
+    </head>
+    <body>
         <h1> Human Resource Management </h1>
         <hr>
         {% if result %}
             <dialog open>Attrition status: {{result}}</dialog>
         {% endif %}
-        <form action="", method="POST">
+        <form action="" method="POST">
             {% csrf_token %}
 
             Employee Number: <input type="number", name="EmployeeNumber"><br>
@@ -80,5 +105,24 @@
             {% endfor %}
         </table>
         </div>
+        {% if qres.has_other_pages %}
+        <div class="pagination">
+            <span class="step-links">
+                {% if qres.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ qres.previous_page_number }}">previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ qres.number }} of {{ qres.paginator.num_pages }}.
+                </span>
+
+                {% if qres.has_next %}
+                    <a href="?page={{ qres.next_page_number }}">next</a>
+                    <a href="?page={{ qres.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
     </body>
 </html>
