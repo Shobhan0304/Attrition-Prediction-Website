@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from pickle import load
 from .models import Emp_data  
 
@@ -7,6 +8,16 @@ model = load(open('./savedModels/attr_model.pkl','rb'))
 # Create your views here.
 def root(request):
     table = Emp_data.objects.all()
+    page = request.GET.get('page', 1)
+    paginator = Paginator(table, 10)
+
+    try:
+        qres = paginator.page(page)
+    except PageNotAnInteger:
+        qres = paginator.page(1)
+    except EmptyPage:
+        qres = paginator.page(paginator.num_pages)
+
     if request.method == 'POST':
         EmpNum = request.POST['EmployeeNumber']
         data = Emp_data.objects.filter(EmployeeNumber = EmpNum).values()[0]
@@ -28,5 +39,5 @@ def root(request):
             op = 'Low Risk of Attrition'
         else:
             op = 'High Risk of Attrition'
-        return render(request, 'main.html', {'result':op, 'qres':table})
-    return render(request, 'main.html',{'qres':table}) 
+        return render(request, 'main.html', {'result':op, 'qres':qres})
+    return render(request, 'main.html',{'qres':qres}) 
